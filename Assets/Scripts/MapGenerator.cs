@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class DungeonGenerator : MonoBehaviour
+public class MapGenerator : MonoBehaviour
 {
     public Tilemap tilemap;
     public TileBase floorTile;
@@ -12,19 +13,33 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] public int randomFillPercent = 50; // Percentage
     [SerializeField] public int iterations = 5;
 
-    private bool[,] grid;
+    public bool[,] grid;
 
-    void Start()
+    public void Generate()
     {
         grid = new bool[width, height];
         RandomFillMap();
 
         for (int i = 0; i < iterations; i++)
         {
-            SmoothMap(); // Renamed to match the provided code
+            SmoothMap();
+        }
+    }
+
+    public void FloodFill(int x, int y, bool[,] visited, HashSet<Vector2Int> room)
+    {
+        if (x < 0 || x >= width || y < 0 || y >= height || grid[x, y] || visited[x, y])
+        {
+            return; // Out of bounds, wall, or already visited
         }
 
-        UpdateTilemap();
+        visited[x, y] = true;
+        room.Add(new Vector2Int(x, y));
+
+        FloodFill(x + 1, y, visited, room);
+        FloodFill(x - 1, y, visited, room);
+        FloodFill(x, y + 1, visited, room);
+        FloodFill(x, y - 1, visited, room);
     }
 
     void RandomFillMap()
@@ -90,7 +105,7 @@ public class DungeonGenerator : MonoBehaviour
         return count;
     }
 
-    void UpdateTilemap()
+    public void UpdateTilemap()
     {
         for (int x = 0; x < width; x++)
         {
