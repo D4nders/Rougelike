@@ -365,8 +365,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1858195984}
-  floorTile: {fileID: 11400000, guid: 10f776b7e5c2be646b662501a1eb01a9, type: 2}
-  wallTile: {fileID: 11400000, guid: 67aa538ca859689429d3190975c9791c, type: 2}
+  floorTile: {fileID: 11400000, guid: 4707c374ee35ab948a784448af714ab7, type: 2}
+  wallTile: {fileID: 11400000, guid: f19429f0a8a2dbf42b568519d9cfbc94, type: 2}
   width: 100
   height: 50
   randomFillPercent: 50
