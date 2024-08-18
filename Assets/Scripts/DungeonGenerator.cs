@@ -9,7 +9,7 @@ public class DungeonGenerator : MonoBehaviour
 
     [SerializeField] public int width = 20;
     [SerializeField] public int height = 20;
-    [SerializeField] public int initialWallDensity = 50; // Percentage
+    [SerializeField] public int randomFillPercent = 50; // Percentage
     [SerializeField] public int iterations = 5;
 
     private bool[,] grid;
@@ -17,28 +17,35 @@ public class DungeonGenerator : MonoBehaviour
     void Start()
     {
         grid = new bool[width, height];
-        InitializeGrid();
+        RandomFillMap();
 
         for (int i = 0; i < iterations; i++)
         {
-            SimulateGeneration();
+            SmoothMap(); // Renamed to match the provided code
         }
 
         UpdateTilemap();
     }
 
-    void InitializeGrid()
+    void RandomFillMap()
     {
         for (int x = 0; x < width; x++)
         {
             for (int y = 0; y < height; y++)
             {
-                grid[x, y] = Random.Range(0, 100) < initialWallDensity;
+                if (x == 0 || x == width - 1 || y == 0 || y == height - 1)
+                {
+                    grid[x, y] = true; // Borders are walls
+                }
+                else
+                {
+                    grid[x, y] = Random.Range(0, 100) < randomFillPercent;
+                }
             }
         }
     }
 
-    void SimulateGeneration()
+    void SmoothMap()
     {
         bool[,] newGrid = new bool[width, height];
 
@@ -46,16 +53,14 @@ public class DungeonGenerator : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                int aliveNeighbors = CountAliveNeighbors(x, y);
+                int neighbourWallTiles = CountAliveNeighbors(x, y);
 
-                if (grid[x, y]) // Alive cell
-                {
-                    newGrid[x, y] = aliveNeighbors >= 4; // Survival rule
-                }
-                else // Dead cell
-                {
-                    newGrid[x, y] = aliveNeighbors == 3; // Birth rule
-                }
+                if (neighbourWallTiles > 4)
+                    newGrid[x, y] = true;
+                else if (neighbourWallTiles < 4)
+                    newGrid[x, y] = false;
+                else
+                    newGrid[x, y] = grid[x, y]; // Keep the same state if exactly 4 neighbors
             }
         }
 
