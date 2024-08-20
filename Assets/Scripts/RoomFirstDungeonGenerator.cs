@@ -16,7 +16,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     [Range(0, 10)]
     private int offset = 1;
     [SerializeField]
-    private bool randomWalkRooms = false;
+    private bool randomWalkRooms = false, applySmoothing = false;
 
     protected override void RunProceduralGeneration()
     {
@@ -47,9 +47,16 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
         HashSet<Vector2Int> corridors = ConnectRooms(roomCenters);
         floor.UnionWith(corridors);
-
-        tilemapVisualizer.PaintFloorTiles(floor);
-        WallGenerator.CreateWalls(floor, tilemapVisualizer);
+        if (applySmoothing)
+        {
+            tilemapVisualizer.PaintAndSmoothFloor(floor);
+            WallGenerator.CreateWalls(tilemapVisualizer.GetFloorTiles(), tilemapVisualizer);
+        }
+        else
+        {
+            tilemapVisualizer.PaintFloorTiles(floor);
+            WallGenerator.CreateWalls(floor, tilemapVisualizer);
+        }
     }
 
     private HashSet<Vector2Int> CreateRandomRooms(List<BoundsInt> roomList)
