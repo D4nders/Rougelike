@@ -16,6 +16,7 @@ public class MapController : MonoBehaviour
     [SerializeField] public int randomFillPercent = 50; // Percentage
     [SerializeField] public int iterations = 5;
     [SerializeField] bool connectRooms = true;
+    [SerializeField] bool colorRooms = false;
 
     public bool[,] grid;
 
@@ -141,6 +142,48 @@ public class MapController : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 tilemap.SetTile(new Vector3Int(x, y, 0), grid[x, y] ? wallTile : floorTile);
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (colorRooms)
+        {
+            List<HashSet<Vector2Int>> rooms = FindRooms();
+            Color[] colors = new Color[20];
+
+            colors[0] = Color.red;
+            colors[1] = Color.green;
+            colors[2] = Color.blue;
+            colors[3] = Color.yellow;
+            colors[4] = Color.cyan;
+            colors[5] = Color.magenta;
+            colors[6] = Color.white;
+            colors[7] = Color.black;
+            colors[8] = Color.gray;
+            colors[9] = new Color(1, 0.5f, 0); // Orange
+            colors[10] = new Color(0.5f, 0, 0.5f); // Purple
+            colors[11] = new Color(0, 0.5f, 0); // Dark Green
+            colors[12] = new Color(0.5f, 0.5f, 0); // Olive
+            colors[13] = new Color(0, 0.5f, 0.5f); // Teal
+            colors[14] = new Color(0.5f, 0, 1); // Indigo
+            colors[15] = new Color(1, 1, 0.5f); // Light Yellow
+            colors[16] = new Color(1, 0.5f, 1); // Pink
+            colors[17] = new Color(0.5f, 1, 1); // Light Cyan
+            colors[18] = new Color(1, 0.5f, 0.5f); // Light Pink
+            colors[19] = new Color(0.75f, 0.75f, 0.75f); // Light Gray
+
+            for (int i = 0; i < rooms.Count; i++)
+            {
+                Color roomColor = colors[i % colors.Length];
+
+                foreach (Vector2Int tile in rooms[i])
+                {
+                    Vector3 tileWorldPos = tilemap.CellToWorld(new Vector3Int(tile.x, tile.y, 0));
+                    Gizmos.color = roomColor;
+                    Gizmos.DrawWireCube(tileWorldPos + new Vector3(0.5f, 0.5f, 0), Vector3.one);
+                }
             }
         }
     }

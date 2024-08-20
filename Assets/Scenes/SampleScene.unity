@@ -883,6 +883,7 @@ MonoBehaviour:
   randomFillPercent: 50
   iterations: 20
   connectRooms: 0
+  colorRooms: 0
   playerPrefab: {fileID: 1617860755471145173, guid: 7b56614827d3b1145a116358382f724d, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
