@@ -12,6 +12,17 @@ public static class WallGenerator
         {
             tilemapVisualizer.PaintSingleBasicWall(position);
         }
+        CreateCornerWalls(tilemapVisualizer, floorPositions);
+    }
+
+    private static void CreateCornerWalls(TilemapVisualizer tilemapVisualizer, HashSet<Vector2Int> floorPositions)
+    {
+        var cornerWallPositions = FindWallsInDirections(floorPositions, Direction2D.diagonalDirectionsList);
+
+        foreach (var position in cornerWallPositions)
+        {
+            tilemapVisualizer.PaintSingleBasicWall(position);
+        }
     }
 
     private static HashSet<Vector2Int> FindWallsInDirections(HashSet<Vector2Int> floorPositions, List<Vector2Int> directionList)
