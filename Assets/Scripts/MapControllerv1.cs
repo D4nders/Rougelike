@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class MapController : MonoBehaviour
+public class MapControllerv1 : MonoBehaviour
 {
     public Tilemap tilemap;
     public TileBase floorTile;
