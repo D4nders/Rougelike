@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fc54b04b4ca6cae448d9888bd0d8674f
+guid: 26af4945cd5eb41489193eb101842751
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -97,13 +97,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tiles 1_0
+      name: Health_Hearth_Full
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 8
-        height: 8
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -111,41 +111,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0f8e61c55ed7cc469794f9d1a599cce
-      internalID: 1069255241
+      spriteID: 990767f71c728024baf3f7761f852cdd
+      internalID: -230562334
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles 1_1
-      rect:
-        serializedVersion: 2
-        x: 8
-        y: 0
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6fcab7d71df849f40b43c8b039bcb978
-      internalID: 1152198564
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tiles 1_2
+      name: Health_Hearth_Three_Fourths
       rect:
         serializedVersion: 2
         x: 16
         y: 0
-        width: 8
-        height: 8
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +132,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d0df4a249f6d0a4099c29f7d7f6c63d
-      internalID: -1829923843
+      spriteID: cddc795a41787c143855f2dea2187f11
+      internalID: -1674468811
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tiles 1_3
+      name: Health_Hearth_Half
       rect:
         serializedVersion: 2
-        x: 24
+        x: 32
         y: 0
-        width: 8
-        height: 8
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,8 +153,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f2652655853ee02479161dd4f18ec8d4
-      internalID: 2081185879
+      spriteID: 95221484cd8291c48a38cb24c099732c
+      internalID: -825339451
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Health_Hearth_One_Fourth
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e808c214bf5d544d807e8ea17a16121
+      internalID: 1306026680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Health_Hearth_Empty
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24ecd5601ccc1e443a604e2a19ced138
+      internalID: -1262782371
       vertices: []
       indices: 
       edges: []
@@ -191,10 +212,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      tiles 1_0: 1069255241
-      tiles 1_1: 1152198564
-      tiles 1_2: -1829923843
-      tiles 1_3: 2081185879
+      Health_Hearth_Empty: -1262782371
+      Health_Hearth_Full: -230562334
+      Health_Hearth_Half: -825339451
+      Health_Hearth_One_Fourth: 1306026680
+      Health_Hearth_Three_Fourths: -1674468811
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
