@@ -9,11 +9,11 @@ public class TilemapVisualizer : MonoBehaviour
     [SerializeField]
     private Tilemap floorTilemap, wallTilemap;
     [SerializeField]
-    private TileBase floorTile, wallTile;
+    private TileBase tile;
 
     public void PaintFloorTiles(IEnumerable<Vector2Int> floorPositions)
     {
-        PaintTiles(floorPositions, floorTilemap, floorTile);
+        PaintTiles(floorPositions, floorTilemap, tile);
     }
 
     private void PaintTiles(IEnumerable<Vector2Int> positions, Tilemap tilemap, TileBase tile)
@@ -24,9 +24,10 @@ public class TilemapVisualizer : MonoBehaviour
         }
     }
 
-    internal void PaintSingleBasicWall(Vector2Int position)
+    internal void PaintSingleWall(Vector2Int position)
     {
-        PaintSingleTile(wallTilemap, wallTile, position);
+        PaintSingleTile(wallTilemap, tile, position);
+        PaintSingleTile(floorTilemap, tile, position);
     }
 
     private void PaintSingleTile(Tilemap tilemap, TileBase tile, Vector2Int position)
@@ -37,7 +38,7 @@ public class TilemapVisualizer : MonoBehaviour
 
     public void PaintAndSmoothFloor(IEnumerable<Vector2Int> floorPositions)
     {
-        PaintTiles(floorPositions, floorTilemap, floorTile);
+        PaintTiles(floorPositions, floorTilemap, tile);
         SmoothTiles(floorTilemap);
     }
 
@@ -68,7 +69,7 @@ public class TilemapVisualizer : MonoBehaviour
                     }
                     else if (filledNeighbors > fillThreshold)
                     {
-                        tilemap.SetTile(tilePosition, floorTile); // Fill tile
+                        tilemap.SetTile(tilePosition, tile); // Fill tile
                     }
                 }
             }
@@ -85,7 +86,7 @@ public class TilemapVisualizer : MonoBehaviour
                 if (i == 0 && j == 0) continue; // Skip the center tile
 
                 Vector3Int neighborPosition = new Vector3Int(x + i, y + j, 0);
-                if (tilemap.HasTile(neighborPosition) && tilemap.GetTile(neighborPosition) == floorTile)
+                if (tilemap.HasTile(neighborPosition) && tilemap.GetTile(neighborPosition) == tile)
                 {
                     count++;
                 }
@@ -104,7 +105,7 @@ public class TilemapVisualizer : MonoBehaviour
             for (int y = bounds.yMin; y < bounds.yMax; y++)
             {
                 Vector3Int tilePosition = new Vector3Int(x, y, 0);
-                if (floorTilemap.HasTile(tilePosition) && floorTilemap.GetTile(tilePosition) == floorTile)
+                if (floorTilemap.HasTile(tilePosition) && floorTilemap.GetTile(tilePosition) == tile)
                 {
                     floorTiles.Add(new Vector2Int(x, y));
                 }

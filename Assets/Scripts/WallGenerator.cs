@@ -10,7 +10,7 @@ public static class WallGenerator
         var basicWallPositions = FindWallsInDirections(floorPositions, Direction2D.cardinalDirectionsList);
         foreach (var position in basicWallPositions)
         {
-            tilemapVisualizer.PaintSingleBasicWall(position);
+            tilemapVisualizer.PaintSingleWall(position);
         }
         CreateCornerWalls(tilemapVisualizer, floorPositions);
     }
@@ -21,7 +21,7 @@ public static class WallGenerator
 
         foreach (var position in cornerWallPositions)
         {
-            tilemapVisualizer.PaintSingleBasicWall(position);
+            tilemapVisualizer.PaintSingleWall(position);
         }
     }
 
