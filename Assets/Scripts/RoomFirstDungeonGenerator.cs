@@ -50,12 +50,12 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         if (applySmoothing)
         {
             tilemapVisualizer.PaintAndSmoothFloor(floor);
-            WallGenerator.CreateWalls(tilemapVisualizer.GetFloorTiles(), tilemapVisualizer);
+            WallGenerator.CreateWallsInDirection(tilemapVisualizer.GetFloorTiles(), tilemapVisualizer);
         }
         else
         {
             tilemapVisualizer.PaintFloorTiles(floor);
-            WallGenerator.CreateWalls(floor, tilemapVisualizer);
+            WallGenerator.CreateWallsInDirection(floor, tilemapVisualizer);
         }
     }
 

@@ -5,21 +5,10 @@ using UnityEngine;
 
 public static class WallGenerator
 {
-    public static void CreateWalls(HashSet<Vector2Int> floorPositions, TilemapVisualizer tilemapVisualizer)
+    public static void CreateWallsInDirection(HashSet<Vector2Int> floorPositions, TilemapVisualizer tilemapVisualizer)
     {
-        var basicWallPositions = FindWallsInDirections(floorPositions, Direction2D.cardinalDirectionsList);
-        foreach (var position in basicWallPositions)
-        {
-            tilemapVisualizer.PaintSingleWall(position);
-        }
-        CreateCornerWalls(tilemapVisualizer, floorPositions);
-    }
-
-    private static void CreateCornerWalls(TilemapVisualizer tilemapVisualizer, HashSet<Vector2Int> floorPositions)
-    {
-        var cornerWallPositions = FindWallsInDirections(floorPositions, Direction2D.diagonalDirectionsList);
-
-        foreach (var position in cornerWallPositions)
+        var wallPositions = FindWallsInDirections(floorPositions, Direction2D.eightDirectionsList);
+        foreach (var position in wallPositions)
         {
             tilemapVisualizer.PaintSingleWall(position);
         }
@@ -35,8 +24,13 @@ public static class WallGenerator
             {
                 var neighbourPosition = position + direction;
                 if (floorPositions.Contains(neighbourPosition) == false)
+
                 {
-                    wallPositions.Add(neighbourPosition);
+                    // Prioritize cardinal directions
+                    if (Direction2D.IsCardinalDirection(direction) || !wallPositions.Contains(neighbourPosition))
+                    {
+                        wallPositions.Add(neighbourPosition);
+                    }
                 }
             }
         }

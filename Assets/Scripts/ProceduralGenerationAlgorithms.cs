@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -90,37 +91,31 @@ public static class ProceduralGenerationAlgorithms
 
 public static class Direction2D
 {
-    public static List<Vector2Int> cardinalDirectionsList = new List<Vector2Int>
-    {
-        new Vector2Int(0, 1), //UP
-        new Vector2Int(1, 0), //RIGHT
-        new Vector2Int(0, -1), // DOWN
-        new Vector2Int(-1, 0) //LEFT
-    };
-
-    public static List<Vector2Int> diagonalDirectionsList = new List<Vector2Int>
-    {
-        new Vector2Int(1, 1), //UP-RIGHT
-        new Vector2Int(1, -1), //RIGHT-DOWN
-        new Vector2Int(-1, -1), // DOWN-LEFT
-        new Vector2Int(-1, 1) //LEFT-UP
-    };
-
     public static List<Vector2Int> eightDirectionsList = new List<Vector2Int>
     {
-        new Vector2Int(0, 1), //UP
-        new Vector2Int(1, 1), //UP-RIGHT
-        new Vector2Int(1, 0), //RIGHT
-        new Vector2Int(1, -1), //RIGHT-DOWN
-        new Vector2Int(0, -1), // DOWN
-        new Vector2Int(-1, -1), // DOWN-LEFT
-        new Vector2Int(-1, 0), //LEFT
-        new Vector2Int(-1, 1) //LEFT-UP
-
+        new Vector2Int(0, 1),   // NORTH
+        new Vector2Int(1, 1),   // NORTH-EAST
+        new Vector2Int(1, 0),   // EAST
+        new Vector2Int(1, -1),  // SOUTH-EAST
+        new Vector2Int(0, -1),  // SOUTH
+        new Vector2Int(-1, -1), // SOUTH-WEST
+        new Vector2Int(-1, 0),  // WEST
+        new Vector2Int(-1, 1)   // NORTH-WEST
     };
+
+    public static bool IsCardinalDirection(Vector2Int direction)
+    {
+        return direction.x == 0 || direction.y == 0;
+    }
+
+    public static bool IsDiagonalDirection(Vector2Int direction)
+    {
+        return direction.x != 0 && direction.y != 0;
+    }
 
     public static Vector2Int GetRandomCardinalDirection()
     {
-        return cardinalDirectionsList[Random.Range(0, cardinalDirectionsList.Count)];
+        int randomIndex = Random.Range(0, 4) * 2; // Cardinal directions are at even indices
+        return eightDirectionsList[randomIndex];
     }
 }
